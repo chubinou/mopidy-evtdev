@@ -50,7 +50,7 @@ class EvtDevAgentTestCorners(unittest.TestCase):
         mock_device.name = 'Mock Device'
         input_device.return_value = mock_device
         a = agent.EvtDevAgent(self.core, self.path, [], self.vol_step_size,
-                              self.refresh_period)
+                              self.refresh_period, {})
         list_devices.assert_called_with(self.path)
         input_device.assert_called_with(self.dev)
         list_devices.return_value = []
@@ -73,7 +73,7 @@ class EvtDevAgentTestCorners(unittest.TestCase):
         mock_device.name = 'Mock Device'
         input_device.return_value = mock_device
         a = agent.EvtDevAgent(self.core, self.path, [],
-                              self.vol_step_size, self.refresh_period)
+                              self.vol_step_size, self.refresh_period, {})
         input_device.assert_called_with(self.dev)
         a.stop()
         mock_device.close.assert_called_with()
@@ -93,7 +93,7 @@ class EvtDevAgentTestCorners(unittest.TestCase):
         mock_device.name = 'Mock Device'
         input_device.return_value = mock_device
         a = agent.EvtDevAgent(self.core, self.path, [],
-                              self.vol_step_size, self.refresh_period)
+                              self.vol_step_size, self.refresh_period, {})
         io_add_watch.assert_called()
         io_callback = io_add_watch.call_args_list[0][0][2]
         io_exception = IOError('Mocked IO Error')
@@ -125,7 +125,8 @@ class EvtDevAgentTest(unittest.TestCase):
         self.devices = map(ProxyInputDevice, self.device_names)
         self.agent = agent.EvtDevAgent(self.core, self.dev_dir,
                                        self.device_names, self.vol_step_size,
-                                       self.refresh)
+                                       self.refresh,
+                                       {})
 
     def tearDown(self):
         self.agent.stop()

@@ -62,7 +62,6 @@ class EvtDevAgent(object):
             elif key == 'mute_btn':
                 self.ecode_map[code] = self._mute
 
-
         # This will initiate a refresh of all attached devices and
         # initiate timeouts
         self._refresh_timeout_callback()
