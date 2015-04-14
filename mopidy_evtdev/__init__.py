@@ -23,6 +23,13 @@ class Extension(ext.Extension):
         schema['devices'] = config.List(optional=True)
         schema['refresh'] = config.Integer(minimum=1)
         schema['vol_step_size'] = config.Integer(minimum=1, maximum=25)
+        schema['play_pause_btn'] = config.String(optional=True)
+        schema['stop_btn'] = config.String(optional=True)
+        schema['next_track_btn'] = config.String(optional=True)
+        schema['prev_track_btn'] = config.String(optional=True)
+        schema['volume_up_btn'] = config.String(optional=True)
+        schema['volume_down_btn'] = config.String(optional=True)
+        schema['mute_btn'] = config.String(optional=True)
         return schema
 
     def validate_environment(self):

@@ -58,6 +58,30 @@ to that group.  E.g.,
 
 Otherwise, just run mopidy as root to avoid any additional configuration requirements.
 
+
+You can define your own key using following options in configuration file::
+
+
+    [evtdev]
+    #same configuration as before
+    ...
+    #define the play/pause button on key A
+    play_pause_btn = KEY_A
+    #define the stop button on key space
+    stop_btn = KEY_SPACE
+    #define mute button on key F12
+    mute_btn = KEY_F12
+    #define next track button on key '-' from the keypad
+    next_track_btn = KEY_KPPLUS
+    #define next track button on key '+' from the keypad
+    prev_track_btn = KEY_KPMINUS
+    #define volume up button on the page up key
+    volume_up_btn = KEY_PAGEUP
+    #define volume up button on the page down key
+    volume_down_btn = KEY_PAGEDOWN
+
+the list of available keys is defined in linux/input.h
+
 Project resources
 =================
 

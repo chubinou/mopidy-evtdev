@@ -13,7 +13,7 @@ class EvtDevAgent(object):
 
     MAX_TIME_INTERVAL = 5.0   # Maximum number of seconds between events
 
-    def __init__(self, core, dev_dir, devices, vol_step_size, refresh):
+    def __init__(self, core, dev_dir, devices, vol_step_size, refresh, btn):
 
         self.core = core
         self.dev_dir = dev_dir
@@ -40,6 +40,28 @@ class EvtDevAgent(object):
             evdev.ecodes.KEY_VOLUMEDOWN: self._volume_down,
             evdev.ecodes.KEY_MUTE: self._mute
         }
+
+        for key, value in btn.iteritems():
+            if value is None:
+                continue
+            code = getattr(evdev.ecodes, value, None)
+            if code is None:
+                continue
+            if key == 'play_pause_btn':
+                self.ecode_map[code] = self._play_pause
+            elif key == 'stop_btn':
+                self.ecode_map[code] = self._play_pause
+            elif key == 'next_track_btn':
+                self.ecode_map[code] = self._next_track
+            elif key == 'prev_track_btn':
+                self.ecode_map[code] = self._prev_track
+            elif key == 'volume_up_btn':
+                self.ecode_map[code] = self._volume_up
+            elif key == 'volume_down_btn':
+                self.ecode_map[code] = self._volume_down
+            elif key == 'mute_btn':
+                self.ecode_map[code] = self._mute
+
 
         # This will initiate a refresh of all attached devices and
         # initiate timeouts

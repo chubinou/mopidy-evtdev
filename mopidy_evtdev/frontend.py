@@ -16,10 +16,19 @@ class EvtDevFrontend(pykka.ThreadingActor):
         vol_step_size = config['evtdev']['vol_step_size']
         refresh = config['evtdev']['refresh']
 
+        btn = {}
+        btn['play_pause_btn'] = config['evtdev']['play_pause_btn']
+        btn['stop_btn'] = config['evtdev']['stop_btn']
+        btn['next_track_btn'] = config['evtdev']['next_track_btn']
+        btn['prev_track_btn'] = config['evtdev']['prev_track_btn']
+        btn['volume_up_btn'] = config['evtdev']['volume_up_btn']
+        btn['volume_down_btn'] = config['evtdev']['volume_down_btn']
+        btn['mute_btn'] = config['evtdev']['mute_btn']
+
         # EvtDevAgent performs all the handling of device
         # key presses on our behalf
         self.agent = EvtDevAgent(core, dev_dir, devices,
-                                 vol_step_size, refresh)
+                                 vol_step_size, refresh, btn)
         logger.info('EvtDevAgent started')
 
     def on_stop(self):
